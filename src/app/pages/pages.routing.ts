@@ -11,10 +11,10 @@ const routes: Routes = [
     //componente donde se rendirizan los otros
     path: 'dashboard', component: PagesComponent,
     children: [
-      { path: '', component: DashboardComponent },
-      { path: 'progress', component: ProgressComponent },
-      { path: 'grafica1', component: Grafica1Component },
-      { path: 'account-settings', component: AccountSettingsComponent },
+      { path: '', component: DashboardComponent, data: { tituloRuta: 'Dashboard' } },
+      { path: 'progress', component: ProgressComponent, data: { tituloRuta: 'ProgressBar' } },
+      { path: 'grafica1', component: Grafica1Component, data: { tituloRuta: 'Grafica' } },
+      { path: 'account-settings', component: AccountSettingsComponent, data: { tituloRuta: 'Ajustes cuenta' } },
     ]
   },
 ]
