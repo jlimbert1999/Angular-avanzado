@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-body">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button [ngClass]="btnClass" type="button" (click)="cambiar_progreso(-5)"><i
+                        class="fa fa-minus"></i></button>
+            </span>
+            <input (ngModelChange)="onChange($event)" [(ngModel)]="progreso" [ngClass]="{'is-invalid':progreso>100}" type="text" class="form-control"
+                placeholder="Product name">
+            <span class="input-group-btn">
+                <button [ngClass]="btnClass" type="button" (click)="cambiar_progreso(5)"><i
+                        class="fa fa-plus"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
