@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { loginForm } from '../interfaces/login.interface';
 import { RegisterForm } from '../interfaces/registerForm.interface';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import jwt_decode from "jwt-decode";
+import { Usuarios } from '../models/usuario.model';
 
 const base_url = environment.base_url
 
@@ -13,10 +14,28 @@ const base_url = environment.base_url
   providedIn: 'root'
 })
 export class UsuariosService {
+  usuario: Usuarios
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: SocialAuthService) {
 
-  constructor(private http: HttpClient, private router: Router, private authService: SocialAuthService) { }
+  }
+  get token(): string {
+    return localStorage.getItem('token') || ''
+  }
+  get idUser(): string { //id del usuario
+    return this.usuario._id || ''
+  }
   crear_usuario(formData: RegisterForm) {
     return this.http.post(`${base_url}/usuarios`, formData)
+  }
+  actualizar_usuario(data: { email: string, nombre: string, role: string }) {
+    data = {
+      ...data,
+      role: this.usuario.role!
+    }
+    return this.http.put(`${base_url}/usuarios/${this.idUser}`, data, { headers: { 'token': this.token } })
   }
   login(formData: any, recordar: boolean) {
     if (recordar) {
@@ -39,9 +58,14 @@ export class UsuariosService {
     ))
   }
   validar_token(): Observable<boolean> {
-    const token = localStorage.getItem('token') || ''
-    return this.http.get(`${base_url}/login/verify_token`, { headers: { 'token': token } }).pipe(map(
-      (res: any) => true
+    return this.http.get(`${base_url}/login/renew_token`, { headers: { 'token': this.token } }).pipe(map(
+      (res: any) => {
+        localStorage.setItem('token', res.token)
+        let decodeUser: any = jwt_decode(res.token)
+        const { email, google, nombre, role, img, _id } = decodeUser
+        this.usuario = new Usuarios(nombre, email, '', img, google, role, _id)
+        return true
+      }
     ), catchError(err => of(false)))
   }
 

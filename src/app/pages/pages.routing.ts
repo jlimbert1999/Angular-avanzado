@@ -5,6 +5,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
+import { PerfilComponent } from './perfil/perfil.component';
 import { ProgressComponent } from './progress/progress.component';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'progress', component: ProgressComponent, data: { tituloRuta: 'ProgressBar' } },
       { path: 'grafica1', component: Grafica1Component, data: { tituloRuta: 'Grafica' } },
       { path: 'account-settings', component: AccountSettingsComponent, data: { tituloRuta: 'Ajustes cuenta' } },
+      { path: 'perfil', component: PerfilComponent, data: { tituloRuta: 'Perfil' } },
     ]
   },
 ]

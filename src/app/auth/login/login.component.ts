@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   email_recordatorio = ''
   Formulario_enviado = false
   loginForm = this.fb.group({
@@ -21,11 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   user: SocialUser;
   loggedIn: boolean;
   constructor(private router: Router, private authService: SocialAuthService, private fb: FormBuilder, private userService: UsuariosService) { }
-  ngOnDestroy(): void {
-    console.log('se desusbribo');
-    // this.loginGoogle.unsubscribe();
-  }
-
+  
   ngOnInit(): void {
     this.email_recordatorio = localStorage.getItem('email') || ''
     if (this.email_recordatorio.length > 0) {
