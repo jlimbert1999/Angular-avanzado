@@ -14,7 +14,7 @@ const base_url = environment.base_url
   providedIn: 'root'
 })
 export class UsuariosService {
-  usuario: Usuarios
+  usuario: Usuarios //user que inicio sesion actualmente
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -30,12 +30,30 @@ export class UsuariosService {
   crear_usuario(formData: RegisterForm) {
     return this.http.post(`${base_url}/usuarios`, formData)
   }
-  actualizar_usuario(data: { email: string, nombre: string, role: string }) {
+  actualizar_perfil(data: { email: string, nombre: string, role: string }) {
     data = {
       ...data,
       role: this.usuario.role!
     }
     return this.http.put(`${base_url}/usuarios/${this.idUser}`, data, { headers: { 'token': this.token } })
+  }
+  eliminar_usuarios(id_usuario: string) {
+    return this.http.delete(`${base_url}/usuarios/${id_usuario}`, { headers: { 'token': this.token } })
+  }
+  obtener_usuarios(desde: number = 0) {
+    return this.http.get<{ total: number, usuarios: any }>(`${base_url}/usuarios?desde=${desde}`, { headers: { 'token': this.token } })
+      .pipe(map(resp => {
+        const usuarios = resp.usuarios.map(
+          //creando nueva instancia de la clase 
+          (user: Usuarios) => new Usuarios(user.nombre, user.email, '', user.img, user.google, user.role, user._id))
+        return {
+          total: resp.total,
+          usuarios
+        }
+      }))
+  }
+  actualizar_usuarios( usuario: Usuarios) {
+    return this.http.put(`${base_url}/usuarios/${usuario._id}`, usuario, { headers: { 'token': this.token } })
   }
   login(formData: any, recordar: boolean) {
     if (recordar) {
@@ -68,7 +86,6 @@ export class UsuariosService {
       }
     ), catchError(err => of(false)))
   }
-
   logout() {
     this.authService.signOut()
     localStorage.removeItem('token')

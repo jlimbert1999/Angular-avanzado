@@ -1,0 +1,39 @@
+<div class="fondo-modal-imagen" [ngClass]="modalImagenService.ocultarModal?'oculto':''">
+    <div id="responsive-modal" class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Seleccione la imagen</h4>
+                    <button (click)="ocultar_modal()" type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="form-body">
+
+                                <div class="text-center">
+                                    <img [src]="modalImagenService.imgURL" *ngIf="!imagenTemporal"
+                                        class="avatar-imagen" id="avatarUser" alt="">
+                                    <img [src]="imagenTemporal" *ngIf="imagenTemporal" class="avatar-imagen"
+                                        id="avatarUser" alt="">
+                                </div>
+                                <hr>
+
+                                <input type="file" (change)="cambiar_imagen($event)">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button (click)="ocultar_modal()" type="button" class="btn btn-default waves-effect"
+                        data-dismiss="modal">Cancelar</button>
+                    <button (click)="subir_imagen()" type="button" class="btn btn-danger waves-effect waves-light">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

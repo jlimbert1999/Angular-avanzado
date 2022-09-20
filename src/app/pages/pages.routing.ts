@@ -4,6 +4,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { PagesComponent } from './pages.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -19,6 +20,9 @@ const routes: Routes = [
       { path: 'grafica1', component: Grafica1Component, data: { tituloRuta: 'Grafica' } },
       { path: 'account-settings', component: AccountSettingsComponent, data: { tituloRuta: 'Ajustes cuenta' } },
       { path: 'perfil', component: PerfilComponent, data: { tituloRuta: 'Perfil' } },
+
+      //matenimientos
+      { path: 'usuarios', component: UsuariosComponent, data: { tituloRuta: 'Administracion de usuarios' } },
     ]
   },
 ]

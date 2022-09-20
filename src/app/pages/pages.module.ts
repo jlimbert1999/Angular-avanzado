@@ -10,6 +10,7 @@ import { ComponetsModule } from '../components/componets.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 
 
@@ -23,6 +24,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     PagesComponent,
     AccountSettingsComponent,
     PerfilComponent,
+    UsuariosComponent,
 
   ],
   exports: [

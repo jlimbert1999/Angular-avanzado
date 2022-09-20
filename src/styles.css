@@ -5,6 +5,36 @@
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both
 }
-#themecolors .selector, .cursor{
+
+#themecolors .selector,
+.cursor {
     cursor: pointer;
+}
+
+/* para whidt de tablas  */
+.w100 {
+    width: 100px;
+}
+
+.avatar {
+    border-radius: 100%;
+    width: 35px;
+}
+
+.avatar-imagen{
+    height: 200px;
+    width: 250px;
+}
+
+.oculto {
+    display: none;
+}
+
+.fondo-modal-imagen {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    height: 100%;
+    top: 0px;
+    width: 100%;
+    z-index: 9999;
 }
