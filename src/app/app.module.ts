@@ -12,7 +12,7 @@ import { NoPageFoudComponent } from './no-page-foud/no-page-foud.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NoPageFoudComponent,
+    NoPageFoudComponent
   ],
   imports: [
     BrowserModule,

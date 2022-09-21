@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Hospital } from '../models/hospital.model';
+import { Medicos } from '../models/medico.model';
 import { Usuarios } from '../models/usuario.model';
 const base_url = environment.base_url
 @Injectable({
@@ -22,15 +24,21 @@ export class BusquedasService {
   }
 
   buscar(tipo: 'usuarios' | 'medicos' | 'hospitales', termino: string) {
-    return this.http.get<{ res: boolean, data: any[] }>(`${base_url}/todo/coleccion/${tipo}/${termino}`, { headers: { 'token': this.token } })
+    return this.http.get<{ res: boolean, data: Usuarios[] | Medicos[] | Hospital[] }>(`${base_url}/todo/coleccion/${tipo}/${termino}`, { headers: { 'token': this.token } })
       .pipe(
-        map(resp => {
+        map((resp:any) => {
           switch (tipo) {
             case 'usuarios':
               return this.transformarUsuarios(resp.data)
               break;
-
+            case 'hospitales':
+              return resp.data
+              break;
+            case 'medicos':
+              return resp.data
+              break;
             default:
+              return []
               break;
           }
           return []

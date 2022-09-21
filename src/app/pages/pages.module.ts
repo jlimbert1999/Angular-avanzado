@@ -11,6 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+import { PipeModule } from '../pipes/pipe.module';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 
 
 
@@ -25,6 +29,9 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     AccountSettingsComponent,
     PerfilComponent,
     UsuariosComponent,
+    HospitalesComponent,
+    MedicosComponent,
+    MedicoComponent,
 
   ],
   exports: [
@@ -40,7 +47,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     ComponetsModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipeModule
   ]
 })
 export class PagesModule { }
