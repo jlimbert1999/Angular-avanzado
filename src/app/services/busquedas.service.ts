@@ -26,7 +26,7 @@ export class BusquedasService {
   buscar(tipo: 'usuarios' | 'medicos' | 'hospitales', termino: string) {
     return this.http.get<{ res: boolean, data: Usuarios[] | Medicos[] | Hospital[] }>(`${base_url}/todo/coleccion/${tipo}/${termino}`, { headers: { 'token': this.token } })
       .pipe(
-        map((resp:any) => {
+        map((resp: any) => {
           switch (tipo) {
             case 'usuarios':
               return this.transformarUsuarios(resp.data)
@@ -44,5 +44,8 @@ export class BusquedasService {
           return []
         })
       )
+  }
+  buscar_global(termino: string) {
+    return this.http.get<{ok:boolean, usuarios:Usuarios[], medicos:Medicos[], hospitales:Hospital[]}>(`${base_url}/todo/${termino}`, { headers: { 'token': this.token } })
   }
 }
