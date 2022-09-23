@@ -78,6 +78,7 @@ export class UsuariosService {
   validar_token(): Observable<boolean> {
     return this.http.get(`${base_url}/login/renew_token`, { headers: { 'token': this.token } }).pipe(map(
       (res: any) => {
+
         localStorage.setItem('token', res.token)
         let decodeUser: any = jwt_decode(res.token)
         const { email, google, nombre, role, img, _id } = decodeUser
